@@ -48,11 +48,13 @@ function GameController(
     const players = [
       {
         name: playerOneName,
-        mark: 1
+        mark: 1,
+        points: 0
       },
       {
         name: playerTwoName,
-        mark: 2
+        mark: 2,
+        points: 0
       }
     ];
   
@@ -73,13 +75,26 @@ function GameController(
         `Placing ${getActivePlayer().name}'s mark into column ${column}, row ${row}`
       );
       board.placeMark(column, row, getActivePlayer().mark);
-        
       
+      if(board.getBoard()[0][0].getValue()== getActivePlayer().mark && board.getBoard()[0][1].getValue()== getActivePlayer().mark && board.getBoard()[0][2].getValue()== getActivePlayer().mark||
+      board.getBoard()[1][0].getValue()== getActivePlayer().mark && board.getBoard()[1][1].getValue()== getActivePlayer().mark && board.getBoard()[1][2].getValue()== getActivePlayer().mark||
+      board.getBoard()[2][0].getValue()== getActivePlayer().mark && board.getBoard()[2][1].getValue()== getActivePlayer().mark && board.getBoard()[2][2].getValue()== getActivePlayer().mark||
+      board.getBoard()[0][0].getValue()== getActivePlayer().mark && board.getBoard()[1][0].getValue()== getActivePlayer().mark && board.getBoard()[2][0].getValue()== getActivePlayer().mark||
+      board.getBoard()[0][1].getValue()== getActivePlayer().mark && board.getBoard()[1][1].getValue()== getActivePlayer().mark && board.getBoard()[2][1].getValue()== getActivePlayer().mark||
+      board.getBoard()[0][2].getValue()== getActivePlayer().mark && board.getBoard()[1][2].getValue()== getActivePlayer().mark && board.getBoard()[2][2].getValue()== getActivePlayer().mark||
+      board.getBoard()[0][0].getValue()== getActivePlayer().mark && board.getBoard()[1][1].getValue()== getActivePlayer().mark && board.getBoard()[2][2].getValue()== getActivePlayer().mark||
+      board.getBoard()[0][2].getValue()== getActivePlayer().mark && board.getBoard()[1][1].getValue()== getActivePlayer().mark && board.getBoard()[2][0].getValue()== getActivePlayer().mark
+      ){
+      getActivePlayer().points++
+      board.printBoard()
+      console.log(`${getActivePlayer().name} wins! ${getActivePlayer().name} has ${getActivePlayer().points} points.`)
+      }
+      else {      
       /*  This is where we would check for a winner and handle that logic,
           such as a win message. */
-  
       switchPlayerTurn();
       printNewRound();
+      }
     };
   
     printNewRound();
