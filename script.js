@@ -105,6 +105,16 @@ function GameController(
           board.resetBoard()
         }
 
+        else if(board.getBoard()[0][0].getValue() !== 0 && board.getBoard()[0][1].getValue() !== 0 && board.getBoard()[0][2].getValue() !== 0 &&
+        board.getBoard()[1][0].getValue()!== 0 && board.getBoard()[1][1].getValue()!== 0 && board.getBoard()[1][2].getValue()!== 0 && 
+        board.getBoard()[2][0].getValue()!== 0 && board.getBoard()[2][1].getValue()!== 0 && board.getBoard()[2][2].getValue()!== 0  
+        ){
+          board.printBoard()
+          console.log(`It's a tie!`)
+          console.log(`Starting new game.`)
+          board.resetBoard()
+        }
+
         else {      
           switchPlayerTurn();
           printNewRound();
