@@ -145,34 +145,41 @@ function DisplayController () {
   const playerTwoPoints = document.querySelector('#player-two-points')
   const buttonNameOne = document.querySelector('#button-name-one')
   const buttonNameTwo = document.querySelector('#button-name-two')
+  const buttonNewGame = document.querySelector('#new-game')
+  const playerOne = game.getPlayers()[0]
+  const playerTwo = game.getPlayers()[1]
+
+  buttonNameOne.addEventListener('click', (e) => {
+    const playerOneName = document.getElementById('player-one-name').value
+    game.changeName(0, playerOneName);
+    document.getElementById('player-one-name').value = ''
+    updateScreen();
+  })
+  
+  buttonNameTwo.addEventListener('click', (e) => {
+    const playerTwoName = document.getElementById('player-two-name').value
+    game.changeName(1, playerTwoName);
+    document.getElementById('player-two-name').value = ''
+    updateScreen();
+  })
+
+  buttonNewGame.addEventListener('click', (e) => {
+    playerOne.points = '0'
+    playerTwo.points = '0'
+    updateScreen();
+  }) 
 
   const updateScreen = () =>{
     boardDiv.textContent= '';
 
     const board = game.getBoard();
     const activePlayer = game.getActivePlayer();
-    const playerOne = game.getPlayers()[0]
-    const playerTwo = game.getPlayers()[1]
 
     playerTurnDiv.textContent= `${activePlayer.name}'s turn`;
     playerOnePoints.textContent= `${playerOne.name} ${playerOne.points} points`
     playerTwoPoints.textContent= `${playerTwo.name} ${playerTwo.points} points`
 
-    buttonNameOne.addEventListener('click', (e) => {
-      const playerOneName = document.getElementById('player-one-name').value
-      game.changeName(0, playerOneName);
-      updateScreen();
-    })
     
-    buttonNameTwo.addEventListener('click', (e) => {
-      const playerTwoName = document.getElementById('player-two-name').value
-      game.changeName(1, playerTwoName);
-      updateScreen();
-    })
-    
-    
-
-
     board.forEach((row, rowIndex) => {
       row.forEach((cell, columnIndex) => {
         const cellButton = document.createElement('button');
