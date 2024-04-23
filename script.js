@@ -78,13 +78,13 @@ function GameController(
   
     const printNewRound = () => {
       board.printBoard();
-      console.log(`${getActivePlayer().name}'s turn.`);
     };
   
     const playRound = (column, row) => {
+      let message = document.querySelector('.message')
 
       if(board.placeMark(row, column, getActivePlayer().mark)==false){
-        alert(`You can't place a mark here, try another space`)
+        message.textContent =`You can't place a mark here, try another space`
         return
       }
 
@@ -102,8 +102,7 @@ function GameController(
         ){
           getActivePlayer().points++
           board.printBoard()
-          alert(`${getActivePlayer().name} wins!`)
-          alert(`Starting new game.`)
+          message.textContent =`${getActivePlayer().name} wins! Starting new game...`
           board.resetBoard()
         }
 
@@ -112,8 +111,7 @@ function GameController(
         board.getBoard()[2][0].getValue()!== 0 && board.getBoard()[2][1].getValue()!== 0 && board.getBoard()[2][2].getValue()!== 0  
         ){
           board.printBoard()
-          alert(`It's a tie!`)
-          alert(`Starting new game.`)
+          message.textContent =`It's a tie! Starting new game...`
           board.resetBoard()
         }
 
@@ -176,8 +174,8 @@ function DisplayController () {
     const activePlayer = game.getActivePlayer();
 
     playerTurnDiv.textContent= `${activePlayer.name}'s turn`;
-    playerOnePoints.textContent= `${playerOne.name} ${playerOne.points} points`
-    playerTwoPoints.textContent= `${playerTwo.name} ${playerTwo.points} points`
+    playerOnePoints.textContent= `${playerOne.name}: ${playerOne.points} points`
+    playerTwoPoints.textContent= `${playerTwo.name}: ${playerTwo.points} points`
 
     
     board.forEach((row, rowIndex) => {
